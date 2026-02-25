@@ -148,13 +148,17 @@ def getproductdetails():
 
 
 import requests
+# send safaricom
 import datetime
+# to show current date and time
 import base64
+# make password strong
 from requests.auth import HTTPBasicAuth
 
 @app.route('/api/mpesa_payment', methods=['POST'])
 def mpesa_payment():
     if request.method == 'POST':
+    # pst we are requesting some data
     # Extract POST Values sent
         amount = request.form['amount']
         phone = request.form['phone']
@@ -162,9 +166,11 @@ def mpesa_payment():
         # Provide consumer_key and consumer_secret provided by safaricom
         consumer_key = "GTWADFxIpUfDoNikNGqq1C3023evM6UH"
         consumer_secret = "amFbAoUByPV2rM5A"
+        # both are commimg from daraja portal
 
         # Authenticate Yourself using above credentials to Safaricom Services, and Bearer Token this is used by safaricom for security identification purposes - Your are given Access
-        api_URL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials" # AUTH URL
+        api_URL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials" 
+        # AUTH entication url URL
         # Provide your consumer_key and consumer_secret
         response = requests.get(api_URL, auth=HTTPBasicAuth(consumer_key, consumer_secret))
         # Get response as Dictionary
@@ -194,6 +200,7 @@ def mpesa_payment():
         "PartyB": "174379",
         "PhoneNumber": phone,
         "CallBackURL": "https://coding.co.ke/api/confirm.php",
+        # to receive poayment confimation
         "AccountReference": " chui SokoGarden Online",
         "TransactionDesc": "Payments for Products"
         }
@@ -218,5 +225,37 @@ def mpesa_payment():
 
 
 
-app.run(debug=True)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.run(debug=True)
